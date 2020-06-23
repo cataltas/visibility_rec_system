@@ -38,8 +38,7 @@ def prepare_gender(file_path,sparkSession=None):
 
 def main():
     df_1=prepare_gender(filepath)
-    return df_1.describe()
+    print(df_1.describe())
 
 if __name__ == "__main__":
-
     main()
