@@ -1,0 +1,13 @@
+#!/usr/bin/env python
+ 
+
+def prepare_gender(spark, file_path):
+    # This loads the JSON file and returns the gender dataframe
+    artists = spark.read.json("hdfs:/user/ct2522/artist")
+    artists.createOrReplaceTempView("artists")
+    results=spark.sql("SELECT name,gender FROM artists")
+    female=results.filter(results.gender=="Female").select(results.name,results.gender)
+    male = results.filter(results.gender=="Male").select(results.name,results.gender)
+    gender = female.union(male) 
+    return gender
+# male count = 531 089, female count = 148 097, lost instances = 984 124 
