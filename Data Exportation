@@ -31,14 +31,14 @@ def prepare_gender(file_path,sparkSession=None):
     gender = female.union(male) 
     data_mb=gender.select("*").toPandas()
     df_mb = pd.DataFrame(data_mb,columns=["Name","Gender"])
-    return df_mb
+    return df_mb.to_string()
 # male count = 531 089, female count = 148 097, lost instances = 984 124 
 
 
 
 def main():
     df_1=prepare_gender(filepath)
-    print(df_1.info())
+    print(df_1.head(),df_1.info())
 
 if __name__ == "__main__":
     main()
