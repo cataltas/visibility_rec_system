@@ -4,7 +4,6 @@
 import sys, getopt, random
 import os
 from pyspark.sql import SparkSession
-import pandas as pd
 
 filepath = "hdfs:/user/ct2522/artist"
 
@@ -29,18 +28,13 @@ def prepare_gender(file_path,sparkSession=None):
     female=results.filter(results.gender=="Female").select(results.name,results.gender)
     male = results.filter(results.gender=="Male").select(results.name,results.gender)
     gender = female.union(male) 
-    gender.printSchema()
-    data_mb=gender.toPandas()
-    df_mb = pd.DataFrame(data_mb,columns=["Name","Gender"])
-    # df= df_mb.astype(str)
-    return df_mb
+    return gender
 # male count = 531 089, female count = 148 097, lost instances = 984 124 
 
 
 
 def main():
-    df_1=prepare_gender(filepath)
-    print(df_1.head())
+        
 
 if __name__ == "__main__":
     main()
