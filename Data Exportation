@@ -23,12 +23,13 @@ def prepare_gender(file_path,sparkSession=None):
     spark = sparkSession or newSparkSession()
 
     # This loads the JSON file and returns the gender dataframe
-    artists = spark.read.json("hdfs:/user/ct2522/artist")
+    artists = spark.read.json(file_path)
     artists.createOrReplaceTempView("artists")
     results=spark.sql("SELECT name,gender FROM artists")
     female=results.filter(results.gender=="Female").select(results.name,results.gender)
     male = results.filter(results.gender=="Male").select(results.name,results.gender)
     gender = female.union(male) 
+    gender.show()
     data_mb=gender.select("*").toPandas()
     df_mb = pd.DataFrame(data_mb,columns=["Name","Gender"])
     # df= df_mb.astype(str)
