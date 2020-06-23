@@ -29,7 +29,7 @@ def prepare_gender(file_path,sparkSession=None):
     female=results.filter(results.gender=="Female").select(results.name,results.gender)
     male = results.filter(results.gender=="Male").select(results.name,results.gender)
     gender = female.union(male) 
-    gender.show()
+    gender.printSchema()
     data_mb=gender.select("*").toPandas()
     df_mb = pd.DataFrame(data_mb,columns=["Name","Gender"])
     # df= df_mb.astype(str)
