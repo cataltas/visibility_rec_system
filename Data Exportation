@@ -3,6 +3,7 @@
 
 import sys, getopt, random
 import os
+import pandas as pd
 from pyspark.sql import SparkSession
 
 filepath = "hdfs:/user/ct2522/artist"
@@ -28,13 +29,22 @@ def prepare_gender(file_path,sparkSession=None):
     female=results.filter(results.gender=="Female").select(results.name,results.gender)
     male = results.filter(results.gender=="Male").select(results.name,results.gender)
     gender = female.union(male) 
-    return gender
+    # Convert to Pandas for cleaning
+    df=gender.select("*").toPandas()
+    df=pd.DataFrame(df)
+    # Remove duplicated data
+    df2=df.drop_duplicates()
+    # Remove names with both genders because unlabelled 
+    df3=df2.drop_duplicates(subset="name",keep=False)
+    return df3
 # male count = 531 089, female count = 148 097, lost instances = 984 124 
+# male count = 498 107, female count = 142 557
+
 
 
 
 def main():
-        
+    prepare_gender(filepath)    
 
 if __name__ == "__main__":
     main()
