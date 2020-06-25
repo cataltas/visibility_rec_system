@@ -33,10 +33,10 @@ def prepare_gender(file_path,sparkSession=None):
     df=gender.select("*").toPandas()
     df=pd.DataFrame(df)
     # Remove duplicated data
-    df2=df.drop_duplicates()
+    df=df.drop_duplicates()
     # Remove names with both genders because unlabelled 
-    df3=df2.drop_duplicates(subset="name",keep=False)
-    df3.write.parquet("{}/{}".format(filepath, "gender.parquet"))
+    df=df.drop_duplicates(subset="name",keep=False)
+    df.to_parquet("gender.parquet")
 # male count = 531 089, female count = 148 097, lost instances = 984 124 
 # male count = 498 107, female count = 142 557
 
