@@ -26,8 +26,10 @@ def get_ids(file_path,sparkSession=None):
     secret = "c0ce447c51394e1198dc56fb787ee326"
     client_credentials_manager = SpotifyClientCredentials(client_id=cid, client_secret=secret)
     sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
-    for i,val in enumerate(gender["name"]):
-        print(i,val)
+    gender_df = gender.select("*").toPandas()
+    gender_df=pd.DataFrame(gender_df,columns=["name","gender"])
+    for i in gender["name"]:
+        print(i)
 def main():
     get_ids(filepath)    
 
