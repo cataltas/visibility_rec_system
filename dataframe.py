@@ -29,7 +29,7 @@ def get_ids(file_path,sparkSession=None):
     gender_df = gender.select("*").toPandas()
     gender_df=pd.DataFrame(gender_df,columns=["name","gender"])
     for i in gender_df["name"]:
-        print(i)
+        print(i.encode("utf-8"))
 def main():
     get_ids(filepath)    
 
