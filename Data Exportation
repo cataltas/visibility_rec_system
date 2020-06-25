@@ -6,7 +6,7 @@ import os
 import pandas as pd
 from pyspark.sql import SparkSession
 
-filepath = "hdfs:/user/ct2522/artist"
+filepath = "hdfs:/user/ct2522"
 
 def newSparkSession():
     # return SparkSession.builder.getOrCreate()
@@ -23,7 +23,7 @@ def prepare_gender(file_path,sparkSession=None):
     spark = sparkSession or newSparkSession()
 
     # This loads the JSON file and returns the gender dataframe
-    artists = spark.read.json(file_path)
+    artists = spark.read.json("{}/{}".format(filepath, "artist"))
     artists.createOrReplaceTempView("artists")
     results=spark.sql("SELECT name,gender FROM artists")
     female=results.filter(results.gender=="Female").select(results.name,results.gender)
@@ -36,7 +36,7 @@ def prepare_gender(file_path,sparkSession=None):
     df2=df.drop_duplicates()
     # Remove names with both genders because unlabelled 
     df3=df2.drop_duplicates(subset="name",keep=False)
-    return df3
+    df3.coalesce(1).write.format("com.databricks.spark.csv").option("header", "true").save("{}/{}".format(filepath, "gender.csv"))
 # male count = 531 089, female count = 148 097, lost instances = 984 124 
 # male count = 498 107, female count = 142 557
 
