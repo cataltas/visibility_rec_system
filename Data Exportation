@@ -36,7 +36,7 @@ def prepare_gender(file_path,sparkSession=None):
     df2=df.drop_duplicates()
     # Remove names with both genders because unlabelled 
     df3=df2.drop_duplicates(subset="name",keep=False)
-    df3.write.format("com.databricks.spark.csv").option("header", "true").save("{}/{}".format(filepath, "gender.csv"))
+    df3.to_csv("{}/{}".format(filepath, "gender.csv"))
 # male count = 531 089, female count = 148 097, lost instances = 984 124 
 # male count = 498 107, female count = 142 557
 
