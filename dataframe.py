@@ -28,11 +28,13 @@ def get_ids(file_path,sparkSession=None):
     sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
     gender_df = gender.select("*").toPandas()
     gender_df=pd.DataFrame(gender_df,columns=["name","gender"])
-    for artist in gender_df["name"]:
+    id_df = pd.DataFrame(columns=["Artist","Gender","Song Id","Popularity"])
+    for i,artist in enumerate(gender_df["name"]):
         artist_search = sp.search(q=artist, type='artist', limit=50,offset=0)
         for info in artist_search['artists']['items']:
             if artist in info["name"]:
-                print(artist.encode("utf-8"),info["id"],info["popularity"])
+                id_df.append([artist.encode("utf-8"),gender_df["gender"].iloc[i],info["id"],info["popularity"]]axis=0)
+                print(id_df.iloc[-1,:])
 
 def main():
     get_ids(filepath)    
