@@ -32,7 +32,7 @@ def get_ids(file_path,sparkSession=None):
         artist_search = sp.search(q=artist, type='artist', limit=50,offset=0)
         for info in artist_search['artists']['items']:
             if artist in info["name"]:
-                print(artist,info["id"],info["popularity"],encoding="utf-8")
+                print(artist.encode("utf-8"),info["id"],info["popularity"])
 
 def main():
     get_ids(filepath)    
