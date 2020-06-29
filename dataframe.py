@@ -33,7 +33,7 @@ def get_ids(file_path,sparkSession=None):
         artist_search = sp.search(q=artist, type='artist', limit=50,offset=0)
         for info in artist_search['artists']['items']:
             if artist in info["name"]:
-                id_df.append([artist.encode("utf-8"),gender_df["gender"].iloc[i],info["id"],info["popularity"]],axis=0)
+                id_df.append(pd.DataFrame([artist.encode("utf-8"),gender_df["gender"].iloc[i],info["id"],info["popularity"]]))
                 print(id_df.iloc[-1,:])
 
 def main():
