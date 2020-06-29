@@ -32,7 +32,7 @@ def get_ids(file_path,sparkSession=None):
     artist = sp.search(q=test_artist, type='artist', limit=50,offset=0)
     for i, t in enumerate(artist['artists']['items']):
         if test_artist in t["name"]:
-        print(t["id"],t["popularity"],t["name"])
+            print(t["id"],t["popularity"],t["name"])
 
 def main():
     get_ids(filepath)    
