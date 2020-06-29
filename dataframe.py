@@ -34,7 +34,7 @@ def get_ids(file_path,sparkSession=None):
         for info in artist_search['artists']['items']:
             if artist in info["name"]:
                 print(artist,gender_df["name"].iloc[i],info["id"],info["popularity"])
-                i+=1
+        i+=1
 
 def main():
     get_ids(filepath)    
