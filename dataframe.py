@@ -34,7 +34,7 @@ def get_ids(file_path,sparkSession=None):
         for info in artist_search['artists']['items']:
             if artist in info["name"]:
                 id_df.append(pd.DataFrame([artist.encode("utf-8"),gender_df["gender"].iloc[i],info["id"],info["popularity"]]))
-                print(id_df.iloc[-1,:])
+                print(id_df.tail(1)
 
 def main():
     get_ids(filepath)    
