@@ -29,11 +29,11 @@ def get_ids(file_path,sparkSession=None):
     gender_df = gender.select("*").toPandas()
     gender_df=pd.DataFrame(gender_df,columns=["name","gender"])
     print(gender_df["name"].iloc[0:20])
-    for artist in gender_df["name"]:
-        artist_search = sp.search(q=artist, type='artist', limit=50,offset=0)
-        for info in artist_search['artists']['items']:
-            if artist in info["name"]:
-                print(info["id"],info["popularity"],artist)
+    # for artist in gender_df["name"]:
+    #     artist_search = sp.search(q=artist, type='artist', limit=50,offset=0)
+    #     for info in artist_search['artists']['items']:
+    #         if artist in info["name"]:
+    #             print(info["id"],info["popularity"],artist)
 
 def main():
     get_ids(filepath)    
