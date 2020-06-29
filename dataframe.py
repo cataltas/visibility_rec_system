@@ -31,7 +31,7 @@ def get_ids(file_path,sparkSession=None):
     test_artist = gender_df["name"].iloc[0]
     artist = sp.search(q=test_artist, type='artist', limit=50,offset=0)
     for i, t in enumerate(artist['artists']['items']):
-        print(i)
+        print(t)
 
 def main():
     get_ids(filepath)    
