@@ -47,6 +47,7 @@ def concat_files(file_path,sparkSession=None):
         temp_id = spark.read.parquet("{}/id_df_{}.parquet".format(filepath, i))
         temp_id.createOrReplaceTempView("temp_id")
         final_id = final_id.union(temp_id)
+        print(temp_id)
     final_id.write.parquet("{}/{}".format(filepath, "final_id_df.parquet"))
 
 def main():
