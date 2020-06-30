@@ -29,7 +29,7 @@ def get_ids(file_path,sparkSession=None):
     gender_df = gender.select("*").toPandas()
     gender_df=pd.DataFrame(gender_df,columns=["name","gender"])
     id_df = pd.DataFrame(columns=["Artist","Gender","Song Id","Popularity"])
-    for i,artist in enumerate(gender_df["name"]):
+    for i,artist in enumerate(gender_df["name"][0:100000]):
         artist_search = sp.search(q=artist, type='artist', limit=50,offset=0)
         for info in artist_search['artists']['items']:
             if artist in info["name"]:
