@@ -32,7 +32,7 @@ def get_ids(file_path,sparkSession=None):
     for i,artist in enumerate(gender_df["name"]):
         try:
             artist_search = sp.search(q=artist, type='artist', limit=50,offset=0)
-        except requests.exceptions.Timeout:
+        except artist_search.exceptions.Timeout:
             print ("Timeout occurred")
         for info in artist_search['artists']['items']:
             if artist in info["name"]:
