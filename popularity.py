@@ -36,7 +36,7 @@ def get_ids(file_path,sparkSession=None):
                 temp_id=pd.DataFrame([[artist.encode("utf-8"),gender_df["gender"].iloc[i],info["id"],info["popularity"]]],columns=["Artist","Gender","Song Id","Popularity"])
                 id_df = id_df.append(temp_id,ignore_index=True)
         print(i)
-    print(id_df.summary())
+    print(id_df.info())
     df_id=spark.createDataFrame(id_df)  
     df_id.write.parquet("{}/{}".format(filepath, "id_df.parquet"))
 
