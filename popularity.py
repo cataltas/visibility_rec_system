@@ -29,8 +29,11 @@ def get_ids(file_path,sparkSession=None):
     gender_df = gender.select("*").toPandas()
     gender_df=pd.DataFrame(gender_df,columns=["name","gender"])
     id_df = pd.DataFrame()
-    for i,artist in enumerate(gender_df["name"][0:100000]):
-        artist_search = sp.search(q=artist, type='artist', limit=50,offset=0)
+    for i,artist in enumerate(gender_df["name"]:
+        try:
+            artist_search = sp.search(q=artist, type='artist', limit=50,offset=0)
+        except requests.exceptions.Timeout:
+            print ("Timeout occurred")
         for info in artist_search['artists']['items']:
             if artist in info["name"]:
                 temp_id=pd.DataFrame([[artist,gender_df["gender"].iloc[i],info["id"],info["popularity"]]],columns=["Artist","Gender","SongId","Popularity"])
