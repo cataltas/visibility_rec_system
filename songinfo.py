@@ -30,7 +30,7 @@ def song_info(file_path,sparkSession=None):
     id_df=pd.DataFrame(id_df)
     # final_df = pd.DataFrame()
     for i,val in enumerate(id_df["SongId"][0:10]):
-        print(sp.track(val))
+        print(val)
         
     # df_final=spark.createDataFrame(final_df)  
     # df_final.write.parquet("{}/{}".format(filepath, "final_music.parquet"))
