@@ -37,7 +37,7 @@ def get_ids(file_path,sparkSession=None):
         #     info_list.append(date)
         # else:
         date=pd.to_datetime(date).to_period('y')
-        info_list.append(date)
+        info_list.append(date.year)
         print(info_list)
     # print(search["tracks"]["items"])
     # id_df = pd.DataFrame()
