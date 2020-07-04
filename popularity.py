@@ -39,7 +39,7 @@ def get_ids(file_path,sparkSession=None):
             date = t["album"]['release_date']
             date_prec = t["album"]['release_date_precision']
             date=pd.to_datetime(date).to_period('y')
-            info_list.append(date)
+            info_list.append(date.year)
         print(info_list)
     # print(search["tracks"]["items"])
     # id_df = pd.DataFrame()
