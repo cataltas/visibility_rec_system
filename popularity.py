@@ -28,18 +28,28 @@ def get_ids(file_path,sparkSession=None):
     sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
     gender_df = gender.select("*").toPandas()
     gender_df=pd.DataFrame(gender_df,columns=["name","gender"])
-    search = sp.search(q=gender_df["name"].iloc[0], type='track', limit=2,offset=0)
-    for i,t in enumerate(search["tracks"]["items"]):
-        count =0
-        for j in t["artists"]:
-            if gender_df["name"].iloc[0] in j["name"]:
-                count+=1
-        if count>0:
-            info_list = [gender_df["name"].iloc[0],gender_df["gender"].iloc[0],t["id"],t["popularity"]]
-            date = t["album"]['release_date']
-            date=pd.to_datetime(date).to_period('y')
-            info_list.append(date.year)
-        print(info_list)
+    id_df = pd.DataFrame()
+    for i,artist in enumerate(gender_df["name"].iloc[0]):
+        try:
+            artist_search = sp.search(q=artist, type='track', limit=50,offset=0)
+        except:
+            print ("Timeout occurred")
+        for info in enumerate(artist_search["tracks"]["items"]):
+            count =0
+            for name in info["artists"]:
+                if gender_df["name"].iloc[i] in name["name"]:
+                    count+=1
+            if count>0:
+                info_list = [artist,gender_df["gender"].iloc[i],info["id"],info["popularity"]]
+                date = info["album"]['release_date']
+                date=pd.to_datetime(date).to_period('y')
+                info_list.append(date.year)
+                temp_id = pd.DataFrame([info_list],columns=["Artist","Gender","SongId","Popularity","Year"])
+                id_df = id_df.append(temp_id,ignore_index=True)
+        print(i)
+    df_id=spark.createDataFrame(id_df)  
+    df_id.write.parquet("{}/{}".format(filepath, "id_data.parquet"))
+
     # print(search["tracks"]["items"])
     # id_df = pd.DataFrame()
     # for i,artist in enumerate(gender_df["name"]):
