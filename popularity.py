@@ -30,12 +30,17 @@ def get_ids(file_path,sparkSession=None):
     gender_df=pd.DataFrame(gender_df,columns=["name","gender"])
     search = sp.search(q=gender_df["name"].iloc[0], type='track', limit=2,offset=0)
     for i,t in enumerate(search["tracks"]["items"]):
-        info_list =[]
-        date = t["album"]['release_date']
-        date_prec = t["album"]['release_date_precision']
-        date=pd.to_datetime(date).to_period('y')
+        count =0
         for j in t["artists"]:
-            print(j["name"])
+            if artist in j["name"]:
+                count+=1
+        if count>0:
+            info_list=[t["id"],t["popularity"]]
+            date = t["album"]['release_date']
+            date_prec = t["album"]['release_date_precision']
+            date=pd.to_datetime(date).to_period('y')
+            info_list.append(date)
+        print(info_list)
     # print(search["tracks"]["items"])
     # id_df = pd.DataFrame()
     # for i,artist in enumerate(gender_df["name"]):
