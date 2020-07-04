@@ -29,8 +29,7 @@ def get_ids(file_path,sparkSession=None):
     gender_df = gender.select("*").toPandas()
     gender_df=pd.DataFrame(gender_df,columns=["name","gender"])
     id_df = pd.DataFrame()
-    for i,artist in enumerate(gender_df["name"]):
-        print(artist)
+    for i,artist in enumerate(gender_df["name"].iloc[0:10]):
         try:
             artist_search = sp.search(q=artist, type='track', limit=50,offset=0)
         except:
@@ -47,24 +46,8 @@ def get_ids(file_path,sparkSession=None):
                 info_list.append(date.year)
                 temp_id = pd.DataFrame([info_list],columns=["Artist","Gender","SongId","Popularity","Year"])
                 id_df = id_df.append(temp_id,ignore_index=True)
-        print(i)
-    # df_id=spark.createDataFrame(id_df)  
-    # df_id.write.parquet("{}/{}".format(filepath, "id_data.parquet"))
-
-    # print(search["tracks"]["items"])
-    # id_df = pd.DataFrame()
-    # for i,artist in enumerate(gender_df["name"]):
-    #     try:
-    #         artist_search = sp.search(q=artist, type='track', limit=50,offset=0)
-    #     except:
-    #         print ("Timeout occurred")
-    #     for info in artist_search['artists']['items']:
-    #         if artist in info["name"]:
-    #             temp_id=pd.DataFrame([[artist,gender_df["gender"].iloc[i],info["id"],info["popularity"]]],columns=["Artist","Gender","SongId","Popularity"])
-    #             id_df = id_df.append(temp_id,ignore_index=True)
-    #     print(i)
-    # df_id=spark.createDataFrame(id_df)  
-    # df_id.write.parquet("{}/{}".format(filepath, "id_df.parquet"))
+    df_id=spark.createDataFrame(id_df)  
+    df_id.write.parquet("{}/{}".format(filepath, "id_data.parquet"))
 def main():
     get_ids(filepath)    
 
