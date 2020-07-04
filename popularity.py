@@ -33,12 +33,9 @@ def get_ids(file_path,sparkSession=None):
         info_list =[]
         date = t["album"]['release_date']
         date_prec = t["album"]['release_date_precision']
-        # if date_prec == "year":
-        #     info_list.append(date)
-        # else:
         date=pd.to_datetime(date).to_period('y')
-        info_list.append(date.year)
-        print(info_list)
+        for j in t["artists"]:
+            print(j["name"])
     # print(search["tracks"]["items"])
     # id_df = pd.DataFrame()
     # for i,artist in enumerate(gender_df["name"]):
