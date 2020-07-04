@@ -35,8 +35,7 @@ def get_ids(file_path,sparkSession=None):
             if gender_df["name"].iloc[0] in j["name"]:
                 count+=1
         if count>0:
-            info_list = [artist,gender_df["gender"]]
-            info_list.append([t["id"],t["popularity"])
+            info_list = [artist,gender_df["gender"],t["id"],t["popularity"]]
             date = t["album"]['release_date']
             date_prec = t["album"]['release_date_precision']
             date=pd.to_datetime(date).to_period('y')
