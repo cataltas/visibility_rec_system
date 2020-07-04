@@ -43,11 +43,12 @@ def get_ids(file_path,sparkSession=None):
                 info_list = [artist,gender_df["gender"].iloc[i],info["id"],info["popularity"]]
                 date = info["album"]['release_date'].split("-")[0]
                 info_list.append(date)
+                print(date)
                 temp_id = pd.DataFrame([info_list],columns=["Artist","Gender","SongId","Popularity","Year"])
                 id_df = id_df.append(temp_id,ignore_index=True)
         print(i)
-    df_id=spark.createDataFrame(id_df)  
-    df_id.write.parquet("{}/{}".format(filepath, "id_data.parquet"))
+    # df_id=spark.createDataFrame(id_df)  
+    # df_id.write.parquet("{}/{}".format(filepath, "id_data.parquet"))
 def main():
     get_ids(filepath)    
 
