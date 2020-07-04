@@ -36,8 +36,8 @@ def get_ids(file_path,sparkSession=None):
             print ("Timeout occurred")
         for info in enumerate(artist_search["tracks"]["items"]):
             count =0
-            for name in info["artists"]:
-                if artist in name["name"]:
+            for j in info["artists"]:
+                if artist in j["name"]:
                     count+=1
             if count>0:
                 info_list = [artist,gender_df["gender"].iloc[i],info["id"],info["popularity"]]
