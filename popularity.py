@@ -32,7 +32,7 @@ def get_ids(file_path,sparkSession=None):
     for i,t in enumerate(search["tracks"]["items"]):
         count =0
         for j in t["artists"]:
-            if artist in j["name"]:
+            if gender_df["name"].iloc[0] in j["name"]:
                 count+=1
         if count>0:
             info_list=[t["id"],t["popularity"]]
