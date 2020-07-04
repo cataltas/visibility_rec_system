@@ -34,7 +34,7 @@ def get_ids(file_path,sparkSession=None):
             artist_search = sp.search(q=artist, type='track', limit=50,offset=0)
         except:
             print ("Timeout occurred")
-        for info in enumerate(artist_search["tracks"]["items"]):
+        for info in artist_search["tracks"]["items"]:
             count =0
             for j in info["artists"]:
                 if artist in j["name"]:
