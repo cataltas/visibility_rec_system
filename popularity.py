@@ -48,8 +48,8 @@ def get_ids(file_path,sparkSession=None):
                 temp_id = pd.DataFrame([info_list],columns=["Artist","Gender","SongId","Popularity","Year"])
                 id_df = id_df.append(temp_id,ignore_index=True)
         print(i)
-    df_id=spark.createDataFrame(id_df)  
-    df_id.write.parquet("{}/{}".format(filepath, "id_data.parquet"))
+    # df_id=spark.createDataFrame(id_df)  
+    # df_id.write.parquet("{}/{}".format(filepath, "id_data.parquet"))
 
     # print(search["tracks"]["items"])
     # id_df = pd.DataFrame()
