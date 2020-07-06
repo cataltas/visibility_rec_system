@@ -29,7 +29,7 @@ def get_ids(file_path,sparkSession=None):
     gender_df = gender.select("*").toPandas()
     gender_df=pd.DataFrame(gender_df,columns=["name","gender"])
     id_df = pd.DataFrame()
-    for i,artist in enumerate(gender_df["name"].iloc[400000:500000]):
+    for i,artist in enumerate(gender_df["name"].iloc[500000:600000]):
         try:
             artist_search = sp.search(q=artist, type='track', limit=50,offset=0)
         except:
@@ -47,7 +47,7 @@ def get_ids(file_path,sparkSession=None):
                 id_df = id_df.append(temp_id,ignore_index=True)
         print(i)
     df_id=spark.createDataFrame(id_df)  
-    df_id.write.parquet("{}/{}".format(filepath, "id_data_5.parquet"))
+    df_id.write.parquet("{}/{}".format(filepath, "id_data_6.parquet"))
 def main():
     get_ids(filepath)    
 
@@ -58,5 +58,12 @@ if __name__ == "__main__":
 # Total songs: 1 335 517 songs, 250 050 females, 1 085 467 males
 # Songs >=80: 1 576 total, 269 females, 1307 males
 # Songs <10: 920 487 total, 166 823 females, 753 664 males
+# 0-100 000 pop_one
+# 100-200 pop_two
+# 200-300 pop_three
+# 300-400 pop_four
+# 400-500 pop_five 
+# 500:600 pop_six 
+# 600: pop_seven 
 
 
