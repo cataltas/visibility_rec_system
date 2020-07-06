@@ -29,7 +29,7 @@ def get_ids(file_path,sparkSession=None):
     gender_df = gender.select("*").toPandas()
     gender_df=pd.DataFrame(gender_df,columns=["name","gender"])
     id_df = pd.DataFrame()
-    for i,artist in enumerate(gender_df["name"].iloc[500000:600000]):
+    for i,artist in enumerate(gender_df["name"].iloc[500000:]):
         try:
             artist_search = sp.search(q=artist, type='track', limit=50,offset=0)
         except:
@@ -63,7 +63,7 @@ if __name__ == "__main__":
 # 200-300 pop_three
 # 300-400 pop_four
 # 400-500 pop_five 
-# 500:600 pop_six 
-# 600: pop_seven 
+# 500:600 pop_six not yet
+# 600: pop_seven not yet
 
 
