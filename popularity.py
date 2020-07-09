@@ -47,7 +47,7 @@ def get_ids(file_path,sparkSession=None):
                 id_df = id_df.append(temp_id,ignore_index=True)
         print(i)
     df_id=spark.createDataFrame(id_df)  
-    df_id.write.parquet("{}/{}".format(filepath, "test.parquet"))
+    df_id.write.parquet("{}/{}".format(filepath, "id_data_6.parquet"))
 def main():
     get_ids(filepath)    
 
