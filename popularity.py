@@ -29,7 +29,7 @@ def get_ids(file_path,sparkSession=None):
     gender_df = gender.select("*").toPandas()
     gender_df=pd.DataFrame(gender_df,columns=["name","gender"])
     id_df = pd.DataFrame()
-    for i,artist in enumerate(gender_df["name"].iloc[46480:46490]):
+    for i,artist in enumerate(gender_df["name"].iloc[0:100000]):
         try:
             artist_search = sp.search(q=artist, type='track', limit=50,offset=0)
         except:
@@ -47,7 +47,7 @@ def get_ids(file_path,sparkSession=None):
                 id_df = id_df.append(temp_id,ignore_index=True)
         print(i)
     df_id=spark.createDataFrame(id_df)  
-    df_id.write.parquet("{}/{}".format(filepath, "test.parquet"))
+    df_id.write.parquet("{}/{}".format(filepath, "id_data_1.parquet"))
 def main():
     get_ids(filepath)    
 
