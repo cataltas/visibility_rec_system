@@ -60,7 +60,9 @@ def concat(file_path,sparkSession=None):
         temp_df = spark.read.parquet("{}/{}".format(filepath, "id_data_{}.parquet".format(i)))
         temp_df.createOrReplaceTempView("temp_df")
         final_df= final_df.union(temp_df)
-    fix_gender = spark.sql("SELECT name AS Artist, gen.gender AS Gender, SongID, Popularity,Year FROM final_df INNER JOIN gen on gen.name = final_df.Artist")
+    fix_gender = final_df
+    # fix_gender = spark.sql("SELECT name AS Artist, gen.gender AS Gender, SongID, Popularity,Year FROM final_df INNER JOIN gen on gen.name = final_df.Artist")
+    fix_gender.createOrReplaceTempView("fix_gender")
     fix_gender.write.parquet("{}/{}".format(filepath, "id_data.parquet"))
         
 def main():
@@ -70,6 +72,10 @@ def main():
 if __name__ == "__main__":
     main()
 
+# Total: 321 324 artists, 69 825 females, 251 499 males
+# Total songs: 1 335 517 songs, 250 050 females, 1 085 467 males
+# Songs >=80: 1 576 total, 269 females, 1307 males
+# Songs <10: 920 487 total, 166 823 females, 753 664 males
 # 0-100 000 pop_one
 # 100-200 pop_two
 # 200-300 pop_three
@@ -84,6 +90,12 @@ if __name__ == "__main__":
 # POP FIVE: 743 817 songs, 40 871 artists, all male 
 # POP SIX: 40396 
 
+
+# TODO: check stamps of where is problem and print for both issues 
+
+# TODO: spark.sql("SELECT name, gen.gender, SongID, Popularity,Year FROM m INNER JOIN gen on gen.name = m.Artist") and create temp view
+
+# Code to bring all the pieces together and fix gender issue from seperation 
 
 
 
