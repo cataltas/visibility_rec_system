@@ -63,7 +63,7 @@ def concat(file_path,sparkSession=None):
     # fix_gender = final_df
     fix_gender = spark.sql("SELECT name AS Artist, gen.gender AS Gender, SongID, Popularity,Year FROM final_df INNER JOIN gen on gen.name = final_df.Artist")
     fix_gender.createOrReplaceTempView("fix_gender")
-    print(fix.count())
+    print(fix_gender.count())
     # fix_gender.write.parquet("{}/{}".format(filepath, "id_data.parquet"))
         
 def main():
