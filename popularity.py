@@ -97,7 +97,6 @@ if __name__ == "__main__":
 
 # Code to bring all the pieces together and fix gender issue from seperation 
 
-1 335 517    
 
 
 
