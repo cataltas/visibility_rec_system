@@ -55,15 +55,13 @@ def concat(file_path,sparkSession=None):
     gen = spark.read.parquet("{}/{}".format(filepath, "gender_df.parquet"))
     gen.createOrReplaceTempView("gen")
     final_df = spark.read.parquet("{}/{}".format(filepath, "id_data_3.parquet"))
-    final_df.createOrReplaceTempView("final_df") 
     for i in range(4,6):
         temp_df = spark.read.parquet("{}/{}".format(filepath, "id_data_{}.parquet".format(i)))
         temp_df.createOrReplaceTempView("temp_df")
         final_df= final_df.union(temp_df)
+    final_df.createOrReplaceTempView("final_df") 
     fix_gender = spark.sql("SELECT name, gen.gender, SongID, Popularity,Year FROM final_df INNER JOIN gen on gen.name = final_df.Artist")
-    fix_gender.createOrReplaceTempView("fix_gender")
-    print(fix_gender.count())
-    # fix_gender.write.parquet("{}/{}".format(filepath, "id_data.parquet"))
+    fix_gender.write.parquet("{}/{}".format(filepath, "id_data.parquet"))
         
 def main():
     # get_ids(filepath)  
