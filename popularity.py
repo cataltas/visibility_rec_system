@@ -56,7 +56,7 @@ def concat(file_path,sparkSession=None):
     gen.createOrReplaceTempView("gen")
     final_df = spark.read.parquet("{}/{}".format(filepath, "id_data_3.parquet"))
     final_df.createOrReplaceTempView("final_df") 
-    for i in range(4:6):
+    for i in range(4,6):
         temp_df = spark.read.parquet("{}/{}".format(filepath, "id_data_{}.parquet".format(i)))
         temp_df.createOrReplaceTempView("temp_df")
         final_df= final_df.union(temp_df)
