@@ -61,6 +61,7 @@ def concat(file_path,sparkSession=None):
         temp_df.createOrReplaceTempView("temp_df")
         final_df= final_df.union(temp_df)
     # fix_gender = final_df
+    print(final_df.count())
     fix_gender = spark.sql("SELECT name AS Artist, gen.gender AS Gender, SongID, Popularity,Year FROM final_df INNER JOIN gen on gen.name = final_df.Artist")
     fix_gender.createOrReplaceTempView("fix_gender")
     print(fix_gender.count())
