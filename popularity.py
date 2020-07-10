@@ -49,7 +49,7 @@ def get_ids(file_path,sparkSession=None):
     df_id=spark.createDataFrame(id_df)  
     df_id.write.parquet("{}/{}".format(filepath, "id_data_6.parquet"))
 
-
+# Function to concatenate and fix mistake in gender previously made 
 def concat(file_path,sparkSession=None):
     spark = sparkSession or newSparkSession()
     gen = spark.read.parquet("{}/{}".format(filepath, "gender_df.parquet"))
@@ -64,8 +64,8 @@ def concat(file_path,sparkSession=None):
     fix_gender.write.parquet("{}/{}".format(filepath, "id_data.parquet"))
         
 def main():
-    # get_ids(filepath)  
-    concat(filepath)
+    get_ids(filepath)  
+    # concat(filepath)
 
 if __name__ == "__main__":
     main()
