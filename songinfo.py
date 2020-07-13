@@ -20,7 +20,7 @@ def newSparkSession():
 
 def song_info(file_path,sparkSession=None):
     spark = sparkSession or newSparkSession()
-    id_df = spark.read.parquet("{}/{}".format(filepath, "id_df.parquet"))
+    id_df = spark.read.parquet("{}/{}".format(filepath, "id_data.parquet"))
     id_df.createOrReplaceTempView("id_df")
     cid ="36b35ee75fec40c399220f9371d2e3b0" 
     secret = "c0ce447c51394e1198dc56fb787ee326"
@@ -29,8 +29,8 @@ def song_info(file_path,sparkSession=None):
     id_df = id_df.select("*").toPandas()
     id_df=pd.DataFrame(id_df)
     # final_df = pd.DataFrame()
-    for i,val in enumerate(id_df["SongId"][0:10]):
-        print(id_df.iloc[i])
+    for i,val in enumerate(id_df["SongId"].iloc[0:10]):
+        print(val)
         
     # df_final=spark.createDataFrame(final_df)  
     # df_final.write.parquet("{}/{}".format(filepath, "final_music.parquet"))
