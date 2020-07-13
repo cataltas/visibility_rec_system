@@ -64,38 +64,22 @@ def concat(file_path,sparkSession=None):
     fix_gender.write.parquet("{}/{}".format(filepath, "id_data.parquet"))
         
 def main():
-    # get_ids(filepath)  
+    get_ids(filepath)  
     concat(filepath)
 
 if __name__ == "__main__":
     main()
 
-# Total: 321 324 artists, 69 825 females, 251 499 males
-# Total songs: 1 335 517 songs, 250 050 females, 1 085 467 males
-# Songs >=80: 1 576 total, 269 females, 1307 males
-# Songs <10: 920 487 total, 166 823 females, 753 664 males
-# 0-100 000 pop_one
-# 100-200 pop_two
-# 200-300 pop_three
-# 300-400 pop_four
-# 400-500 pop_five 
-# 500: pop_last 
-
 # POP ONE: 1 080 537 songs, 48 739 artists
 # POP TWO: 1 346 857 songs, 57 763 artists
-# POP THREE: 1 126 637 songs, 51 417 artists, all male
-# POP FOUR: 41 365 artists, 773 752 songs, all male
-# POP FIVE: 743 817 songs, 40 871 artists, all male 
+# POP THREE: 1 126 637 songs, 51 417 artists
+# POP FOUR: 41 365 artists, 773 752 songs
+# POP FIVE: 743 817 songs, 40 871 artists
 # POP SIX: 919 709 songs, 55 219 artists
-
-# TOTAL: 243 957 artists
-
-
-# TODO: check stamps of where is problem and print for both issues 
-
-# TODO: spark.sql("SELECT name, gen.gender, SongID, Popularity,Year FROM m INNER JOIN gen on gen.name = m.Artist") and create temp view
-
-# Code to bring all the pieces together and fix gender issue from seperation 
+# TOTAL: 5 991 309 songs, 295 374 artists, 66 122 female, 229 252 male
+# 2 052 >80 popularity (338 female,1 714 male), 4 491 777 <10 (1 010 251 female,4 491 777 male, 3 080 507 have zero
+# Year: 0000 to 2020, 717 years 0000
+# TODO: see if ratio of women proportional to popularity, if so problem more out of my hands
 
 
 
