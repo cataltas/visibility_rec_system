@@ -64,8 +64,8 @@ def concat(file_path,sparkSession=None):
     fix_gender.write.parquet("{}/{}".format(filepath, "id_data.parquet"))
         
 def main():
-    get_ids(filepath)  
-    # concat(filepath)
+    # get_ids(filepath)  
+    concat(filepath)
 
 if __name__ == "__main__":
     main()
@@ -81,12 +81,14 @@ if __name__ == "__main__":
 # 400-500 pop_five 
 # 500: pop_last 
 
-# POP ONE: issue at 46882 or so
-# POP TWO: 
+# POP ONE: 1 080 537 songs, 48 739 artists
+# POP TWO: 1 346 857 songs, 57 763 artists
 # POP THREE: 1 126 637 songs, 51 417 artists, all male
 # POP FOUR: 41 365 artists, 773 752 songs, all male
 # POP FIVE: 743 817 songs, 40 871 artists, all male 
-# POP SIX: 40396 
+# POP SIX: 919 709 songs, 55 219 artists
+
+# TOTAL: 243 957 artists
 
 
 # TODO: check stamps of where is problem and print for both issues 
