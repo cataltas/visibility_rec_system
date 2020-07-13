@@ -26,7 +26,9 @@ def song_info(file_path,sparkSession=None):
     secret = "c0ce447c51394e1198dc56fb787ee326"
     client_credentials_manager = SpotifyClientCredentials(client_id=cid, client_secret=secret)
     sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
+    print('starting pandas trans')
     id_df = id_df.select("*").toPandas()
+    print('end')
     id_df=pd.DataFrame(id_df)
     # final_df = pd.DataFrame()
     # for i,val in enumerate(id_df["SongId"].iloc[0:10]):
