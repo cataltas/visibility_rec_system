@@ -9,7 +9,7 @@ filepath = "hdfs:/user/ct2522"
 
 def newSparkSession():
     # return SparkSession.builder.getOrCreate()
-    mem = "15GB"
+    mem = "10GB"
     spark = (SparkSession.builder.appName("Music_Project")
              .master("yarn")
              .config("sparn.executor.memory", mem)
