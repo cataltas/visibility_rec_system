@@ -20,7 +20,6 @@ def newSparkSession():
 
 def song_info(file_path,sparkSession=None):
     spark = sparkSession or newSparkSession()
-    spark.conf.set("spark.sql.execution.arrow.pyspark.enabled", "true")
     id_df = spark.read.parquet("{}/{}".format(filepath, "id_data.parquet"))
     id_df.createOrReplaceTempView("id_df")
     cid ="36b35ee75fec40c399220f9371d2e3b0" 
