@@ -28,7 +28,7 @@ def song_info(file_path,sparkSession=None):
     client_credentials_manager = SpotifyClientCredentials(client_id=cid, client_secret=secret)
     sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
     final_df = pd.DataFrame()
-    for i,val in enumerate(id_df["SongId"]):
+    for i,val in enumerate(id_df["SongId"].collect()):
         print(val)
         
     # df_final=spark.createDataFrame(final_df)  
