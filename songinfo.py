@@ -27,10 +27,11 @@ def song_info(file_path,sparkSession=None):
     client_credentials_manager = SpotifyClientCredentials(client_id=cid, client_secret=secret)
     sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
     names = spark.sql("SELECT Artist FROM id_df")
-    names = names.toPandas()
+    n = names.toPandas()
     final_df = pd.DataFrame()
-    for i,val in enumerate(names.iloc[0:50]):
-        print(val)
+    print(n.iloc[0:10])
+    # for i,val in enumerate(names.iloc[0:50]):
+    #     print(val)
         
     # df_final=spark.createDataFrame(final_df)  
     # df_final.write.parquet("{}/{}".format(filepath, "final_music.parquet"))
