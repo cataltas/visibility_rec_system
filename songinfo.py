@@ -26,10 +26,11 @@ def song_info(file_path,sparkSession=None):
     secret = "c0ce447c51394e1198dc56fb787ee326"
     client_credentials_manager = SpotifyClientCredentials(client_id=cid, client_secret=secret)
     sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
+    names = spark.sql("SELECT Artists FROM id_df")
+    names = names.toPandas()
     final_df = pd.DataFrame()
-    id_df.select(id_df["SongId"]).collect()
-    # for i,val in enumerate(id_df.select(id_df["SongId"]).collect()):
-    #     print(val)
+    for i,val in enumerate(names.iloc[i:i+50]):
+        print(val)
         
     # df_final=spark.createDataFrame(final_df)  
     # df_final.write.parquet("{}/{}".format(filepath, "final_music.parquet"))
@@ -39,3 +40,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+# sql select names then to pandas then get all the new shit then merge with sql
