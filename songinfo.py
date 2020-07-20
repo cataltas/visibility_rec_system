@@ -29,7 +29,7 @@ def song_info(file_path,sparkSession=None):
     names = spark.sql("SELECT Artists FROM id_df")
     names = names.toPandas()
     final_df = pd.DataFrame()
-    for i,val in enumerate(names.iloc[i:i+50]):
+    for i,val in enumerate(names.iloc[0:50]):
         print(val)
         
     # df_final=spark.createDataFrame(final_df)  
