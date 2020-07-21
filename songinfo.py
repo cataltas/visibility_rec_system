@@ -13,9 +13,8 @@ def newSparkSession():
              .master("yarn")
              .config("sparn.executor.memory", mem)
              .config("sparn.driver.memory", mem)
-            #  .config("sp")
              .getOrCreate())
-    # spark.sparkContext.setLogLevel("ERROR")
+    spark.sparkContext.setLogLevel("ERROR")
     return spark
 
 def song_info(file_path,sparkSession=None):
