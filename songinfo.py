@@ -27,7 +27,8 @@ def song_info(file_path,sparkSession=None):
     client_credentials_manager = SpotifyClientCredentials(client_id=cid, client_secret=secret)
     sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
     names = spark.sql("SELECT SongID FROM id_df")
-    names[100].show()
+    arr=id_df.select("SongID").rdd.collect
+    println(arr(100))
     # names = names.select("*").toPandas()
     # final_df = pd.DataFrame()
     # print(n.iloc[0:10])
