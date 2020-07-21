@@ -9,7 +9,7 @@ filepath = "hdfs:/user/ct2522"
 
 def newSparkSession():
     # return SparkSession.builder.getOrCreate()
-    mem = "30GB"
+    mem = "10GB"
     spark = (SparkSession.builder.appName("Music_Project")
              .master("yarn")
              .config("sparn.executor.memory", mem)
@@ -27,9 +27,10 @@ def song_info(file_path,sparkSession=None):
     client_credentials_manager = SpotifyClientCredentials(client_id=cid, client_secret=secret)
     sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
     names = spark.sql("SELECT SongID FROM id_df")
-    n = names.select("*").toPandas()
-    final_df = pd.DataFrame()
-    print(n.iloc[0:10])
+    names[100].show()
+    # names = names.select("*").toPandas()
+    # final_df = pd.DataFrame()
+    # print(n.iloc[0:10])
     # for i,val in enumerate(names.iloc[0:50]):
     #     print(val)
         
