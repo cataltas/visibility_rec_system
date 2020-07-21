@@ -8,16 +8,15 @@ from pyspark.sql import SparkSession
 filepath = "hdfs:/user/ct2522"
 
 def newSparkSession():
-    return SparkSession.builder.getOrCreate()
-    # mem = "5GB"
-    # spark = (SparkSession.builder.appName("Music_Project")
-    #          .master("yarn")
-    #          .config("sparn.executor.memory", mem)
-    #          .config("sparn.driver.memory", mem)
-    #         #  .config("sp")
-    #          .getOrCreate())
-    # # spark.sparkContext.setLogLevel("ERROR")
-    # return spark
+    mem = "5GB"
+    spark = (SparkSession.builder.appName("Music_Project")
+             .master("yarn")
+             .config("sparn.executor.memory", mem)
+             .config("sparn.driver.memory", mem)
+            #  .config("sp")
+             .getOrCreate())
+    # spark.sparkContext.setLogLevel("ERROR")
+    return spark
 
 def song_info(file_path,sparkSession=None):
     spark = sparkSession or newSparkSession()
