@@ -12,8 +12,9 @@ def newSparkSession():
     mem = "5GB"
     spark = (SparkSession.builder.appName("Music_Project")
              .master("yarn")
-             .config("sparn.executor.memory", mem)
-             .config("sparn.driver.memory", mem)
+             .config("spark.executor.memory", mem)
+             .config("spark.driver.memory", mem)
+            #  .config("sp")
              .getOrCreate())
     spark.sparkContext.setLogLevel("ERROR")
     return spark
