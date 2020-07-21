@@ -28,7 +28,7 @@ def song_info(file_path,sparkSession=None):
     sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
     # names = spark.sql("SELECT SongID FROM id_df")
     names=id_df.select("SongID").rdd.collect
-    print(names[0])
+    print(names)
     # names = names.select("*").toPandas()
     # final_df = pd.DataFrame()
     # print(n.iloc[0:10])
