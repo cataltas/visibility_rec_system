@@ -29,7 +29,7 @@ def song_info(file_path,sparkSession=None):
         sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
         names = id_df.select("SongID").toPandas()
         # for i in range(0,len(names)):
-        for i in range(0,100)
+        for i in range(0,100):
             song_ids = names.iloc[i:i+50]["SongID"].tolist()
             i+=50
             info = sp.audio_features(song_ids)
