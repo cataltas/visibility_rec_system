@@ -28,13 +28,13 @@ def song_info(file_path,sparkSession=None):
         client_credentials_manager = SpotifyClientCredentials(client_id=cid, client_secret=secret)
         sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
         names = id_df.select("SongID").toPandas()
-        # for i in range(0,len(names)):
-        for i in range(0,80):
-            song_ids = names.iloc[i:i+50]["SongID"].tolist()
-            # if (i+50)<len(names):
-            #     song_ids = names.iloc[i:i+50]["SongID"].tolist()
-            # else:
-            #     song_ids = names.iloc[i:len(names)]["SongID"].tolist()
+        i=0
+        # while i<len(names):
+        while i<80:
+            if (i+50)<80:
+                song_ids = names.iloc[i:i+50]["SongID"].tolist()
+            else:
+                song_ids = names.iloc[i:80]["SongID"].tolist()
             i+=50
             info = sp.audio_features(song_ids)
             print(len(song_ids))
