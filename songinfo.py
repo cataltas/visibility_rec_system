@@ -30,7 +30,7 @@ def song_info(file_path,sparkSession=None):
         names = id_df.select("SongID").toPandas()
         i=0
         # m=len(names)
-        m=50
+        m=80
         while i<m:
             if (i+50)<m:
                 song_ids = names.iloc[i:i+50]["SongID"].tolist()
@@ -38,13 +38,13 @@ def song_info(file_path,sparkSession=None):
                 song_ids = names.iloc[i:m]["SongID"].tolist()
             i+=50
             info = sp.audio_features(song_ids)
-            for j,val in enumerate(info["audio_features"]):
-                info_line = [song_ids[j],val["danceability"],val["energy"],val["key"],val["loudness"],val["mode"],
+            for val in enumerate(info["audio_features"]):
+                info_line = [val["danceability"],val["energy"],val["key"],val["loudness"],val["mode"],
                             val["speechiness"],val["acousticness"],val["instrumentalness"],val["liveness"],val["valence"],val["tempo"]]
                 temp_info = pd.DataFrame([info_line],columns=["SongID","danceability","energy","key","loudness","mode","speechiness","acousticness",
                                                                 "instrumentalness","liveness","valence","tempo"])
                 final_df.append(temp_info,ignore_index = True)
-            print(final_df)
+        print(final_df)
         
         # names = names.select("*").toPandas()
         # final_df = pd.DataFrame()
