@@ -38,7 +38,7 @@ def song_info(file_path,sparkSession=None):
                 song_ids = names.iloc[i:m]["SongID"].tolist()
             i+=50
             info = sp.audio_features(song_ids)
-            print(info)
+            print(song_ids)
         
         # names = names.select("*").toPandas()
         # final_df = pd.DataFrame()
