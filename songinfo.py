@@ -27,7 +27,11 @@ def song_info(file_path,sparkSession=None):
         client_credentials_manager = SpotifyClientCredentials(client_id=cid, client_secret=secret)
         sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
         names = id_df.select("SongID").toPandas()
-        print(names.iloc[0:10])
+        for i,val in enumerate(names):
+            song_ids = names.iloc[i:i+50]
+            i+=50
+            print(song_ids)
+        
         # names = names.select("*").toPandas()
         # final_df = pd.DataFrame()
         # print(n.iloc[0:10])
