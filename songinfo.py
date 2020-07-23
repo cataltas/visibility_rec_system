@@ -20,7 +20,7 @@ def newSparkSession():
 def song_info(file_path,sparkSession=None):
     spark = sparkSession or newSparkSession()
     final_df = pd.DataFrame()
-    for i in range(1,7):
+    for i in range(1,2):
         id_df = spark.read.parquet("{}/{}".format(filepath, "id_data_{}.parquet".format(i)))
         id_df.createOrReplaceTempView("id_df")
         cid ="36b35ee75fec40c399220f9371d2e3b0" 
@@ -31,9 +31,13 @@ def song_info(file_path,sparkSession=None):
         # for i in range(0,len(names)):
         for i in range(0,80):
             song_ids = names.iloc[i:i+50]["SongID"].tolist()
+            # if (i+50)<len(names):
+            #     song_ids = names.iloc[i:i+50]["SongID"].tolist()
+            # else:
+            #     song_ids = names.iloc[i:len(names)]["SongID"].tolist()
             i+=50
             info = sp.audio_features(song_ids)
-            print(info)
+            print(len(song_ids))
         
         # names = names.select("*").toPandas()
         # final_df = pd.DataFrame()
