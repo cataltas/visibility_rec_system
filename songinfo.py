@@ -19,6 +19,7 @@ def newSparkSession():
 
 def song_info(file_path,sparkSession=None):
     spark = sparkSession or newSparkSession()
+    final_df = pd.DataFrame()
     for i in range(1,7):
         id_df = spark.read.parquet("{}/{}".format(filepath, "id_data_{}.parquet".format(i)))
         id_df.createOrReplaceTempView("id_df")
@@ -27,10 +28,12 @@ def song_info(file_path,sparkSession=None):
         client_credentials_manager = SpotifyClientCredentials(client_id=cid, client_secret=secret)
         sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
         names = id_df.select("SongID").toPandas()
-        for i in range(0,len(names)):
+        # for i in range(0,len(names)):
+        for i in range(0,100)
             song_ids = names.iloc[i:i+50]["SongID"].tolist()
             i+=50
-            print(song_ids)
+            info = sp.audio_features(song_ids)
+            print(info)
         
         # names = names.select("*").toPandas()
         # final_df = pd.DataFrame()
