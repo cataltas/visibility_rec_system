@@ -20,7 +20,7 @@ def newSparkSession():
 def song_info(file_path,sparkSession=None):
     spark = sparkSession or newSparkSession()
     final_df = pd.DataFrame()
-    id_df = spark.read.parquet("{}/{}".format(filepath, "id_data_6.parquet"))
+    id_df = spark.read.parquet("{}/{}".format(filepath, "id_data_4.parquet"))
     id_df.createOrReplaceTempView("id_df")
     cid ="36b35ee75fec40c399220f9371d2e3b0" 
     secret = "c0ce447c51394e1198dc56fb787ee326"
@@ -45,11 +45,24 @@ def song_info(file_path,sparkSession=None):
                 final_df =final_df.append(temp_info,ignore_index = True)
         print(i)
     df_final=spark.createDataFrame(final_df)  
-    df_final.write.parquet("{}/{}".format(filepath, "final_music_6.parquet"))
+    df_final.write.parquet("{}/{}".format(filepath, "final_music_4.parquet"))
+
+def concat(file_path,sparkSession=None):
+    spark = sparkSession or newSparkSession()
+    idd = spark.read.parquet("{}/{}".format(filepath, "id_data.parquet"))
+    idd.createOrReplaceTempView("idd")
+    final_df = spark.read.parquet("{}/{}".format(filepath, "final_music_1.parquet"))
+    for i in range(2,7):
+        temp_df = spark.read.parquet("{}/{}".format(filepath, "final_music_{}.parquet".format(i)))
+        temp_df.createOrReplaceTempView("temp_df")
+        final_df= final_df.union(temp_df)
+    final_df.createOrReplaceTempView("final_df") 
+    final = spark.sql("SELECT * FROM final_df INNER JOIN idd on idd.SongId = final_df.SongId")
+    final.write.parquet("{}/{}".format(filepath, "final.parquet"))
 
 def main():
     song_info(filepath)    
-
+    concat(filepath)
 if __name__ == "__main__":
     main()
 
