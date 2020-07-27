@@ -39,7 +39,9 @@ def song_info(file_path,sparkSession=None):
         i+=50
         info = sp.audio_features(song_ids)
         for j,val in enumerate(info):
-            info_line = [song_ids[j],val["danceability"],val["energy"],val["key"],val["loudness"],val["mode"],
+            info_line = [
+                # song_ids[j],val["danceability"],val["energy"],val["key"],val["loudness"],
+            val["mode"],
                         val["speechiness"],val["acousticness"],val["instrumentalness"],val["liveness"],val["valence"],val["tempo"]]
             print(info_line)
     #         temp_info = pd.DataFrame([info_line],columns=["SongID","danceability","energy","key","loudness","mode","speechiness","acousticness",
