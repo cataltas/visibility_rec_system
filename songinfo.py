@@ -39,6 +39,7 @@ def song_info(file_path,sparkSession=None):
         i+=50
         info = sp.audio_features(song_ids)
         for j,val in enumerate(info):
+            print(val)
             info_line = [
                 # song_ids[j],val["danceability"],val["energy"],val["key"],val["loudness"],
             val["mode"],
