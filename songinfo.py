@@ -38,13 +38,14 @@ def song_info(file_path,sparkSession=None):
             song_ids = names.iloc[i:m]["SongID"].tolist()
         i+=50
         info = sp.audio_features(song_ids)
-        for j,val in enumerate(info):
-            print(val,song_ids[j])
-            info_line = [
-                # song_ids[j],val["danceability"],val["energy"],val["key"],val["loudness"],
-            val["mode"],
-                        val["speechiness"],val["acousticness"],val["instrumentalness"],val["liveness"],val["valence"],val["tempo"]]
-            print(info_line)
+        if info != None: 
+            for j,val in enumerate(info):
+                print(val,song_ids[j])
+                info_line = [
+                    # song_ids[j],val["danceability"],val["energy"],val["key"],val["loudness"],
+                val["mode"],
+                            val["speechiness"],val["acousticness"],val["instrumentalness"],val["liveness"],val["valence"],val["tempo"]]
+                print(info_line)
     #         temp_info = pd.DataFrame([info_line],columns=["SongID","danceability","energy","key","loudness","mode","speechiness","acousticness",
     #                                                         "instrumentalness","liveness","valence","tempo"])
     #         final_df =final_df.append(temp_info,ignore_index = True)
