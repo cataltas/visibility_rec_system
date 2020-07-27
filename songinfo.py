@@ -27,10 +27,8 @@ def song_info(file_path,sparkSession=None):
     client_credentials_manager = SpotifyClientCredentials(client_id=cid, client_secret=secret)
     sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
     names = id_df.select("SongID").toPandas()
-    # i=0
-    # m=len(names)
-    i=2900
-    m=3000
+    i=0
+    m=len(names)
     while i<m:
         if (i+50)<m:
             song_ids = names.iloc[i:i+50]["SongID"].tolist()
@@ -40,18 +38,14 @@ def song_info(file_path,sparkSession=None):
         info = sp.audio_features(song_ids)
         for j,val in enumerate(info):
             if val!=None:
-                print(val,song_ids[j])
-                info_line = [
-                    # song_ids[j],val["danceability"],val["energy"],val["key"],val["loudness"],
-                val["mode"],
+                info_line = [song_ids[j],val["danceability"],val["energy"],val["key"],val["loudness"],val["mode"],
                             val["speechiness"],val["acousticness"],val["instrumentalness"],val["liveness"],val["valence"],val["tempo"]]
-                print(info_line)
-        #         temp_info = pd.DataFrame([info_line],columns=["SongID","danceability","energy","key","loudness","mode","speechiness","acousticness",
-        #                                                         "instrumentalness","liveness","valence","tempo"])
-        #         final_df =final_df.append(temp_info,ignore_index = True)
+                temp_info = pd.DataFrame([info_line],columns=["SongID","danceability","energy","key","loudness","mode","speechiness","acousticness",
+                                                                "instrumentalness","liveness","valence","tempo"])
+                final_df =final_df.append(temp_info,ignore_index = True)
         print(i)
-    # df_final=spark.createDataFrame(final_df)  
-    # df_final.write.parquet("{}/{}".format(filepath, "final_music_1.parquet"))
+    df_final=spark.createDataFrame(final_df)  
+    df_final.write.parquet("{}/{}".format(filepath, "final_music_1.parquet"))
 
 def main():
     song_info(filepath)    
