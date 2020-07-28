@@ -67,3 +67,7 @@ if __name__ == "__main__":
     main()
 
 # put all six in concat then inner join with id data total on song id
+
+
+# five: 743404 songs, out of 743817 songs 
+
