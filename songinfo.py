@@ -8,7 +8,7 @@ from pyspark.sql import SparkSession
 filepath = "hdfs:/user/ct2522"
 
 def newSparkSession():
-    mem = "5GB"
+    mem = "10GB"
     spark = (SparkSession.builder.appName("Music_Project")
              .master("yarn")
              .config("sparn.executor.memory", mem)
@@ -27,7 +27,7 @@ def song_info(file_path,sparkSession=None):
     client_credentials_manager = SpotifyClientCredentials(client_id=cid, client_secret=secret)
     sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
     names = id_df.select("SongID").toPandas()
-    i=1000000
+    i=0
     m=len(names)
     while i<m:
         if (i+50)<m:
