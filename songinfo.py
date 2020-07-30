@@ -35,7 +35,10 @@ def song_info(file_path,sparkSession=None):
         else:
             song_ids = names.iloc[i:m]["SongID"].tolist()
         i+=50
-        info = sp.audio_features(song_ids)
+        try:
+            info = sp.audio_features(song_ids)
+        except:
+            print ("Timeout occurred")
         for j,val in enumerate(info):
             if val!=None:
                 info_line = [song_ids[j],val["danceability"],val["energy"],val["key"],val["loudness"],val["mode"],
