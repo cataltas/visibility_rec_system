@@ -1,6 +1,7 @@
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 import sys, getopt, random
+import numpy as np
 import os
 import pandas as pd
 from pyspark.sql import SparkSession
@@ -28,7 +29,7 @@ def song_info(file_path,sparkSession=None):
     sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
     names = id_df.select("SongID").toPandas()
     i=0
-    m=floor(len(names)/2)
+    m=np.floor(len(names)/2)
     while i<m:
         if (i+50)<m:
             song_ids = names.iloc[i:i+50]["SongID"].tolist()
