@@ -29,8 +29,8 @@ def song_info(file_path,sparkSession=None):
     sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
     names = id_df.select("SongID").toPandas()
     # i=0
-    i=int(np.floor(len(names)/2))
-    m=int(np.floor(3*len(names)/4))
+    i=459900
+    m=460000
     # m=len(names)
     while i<m:
         if (i+50)<m:
