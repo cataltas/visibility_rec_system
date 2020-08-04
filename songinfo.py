@@ -21,7 +21,7 @@ def newSparkSession():
 def song_info(file_path,sparkSession=None):
     spark = sparkSession or newSparkSession()
     final_df = pd.DataFrame()
-    id_df = spark.read.parquet("{}/{}".format(filepath, "id_data_6.parquet"))
+    id_df = spark.read.parquet("{}/{}".format(filepath, "id_data_2.parquet"))
     id_df.createOrReplaceTempView("id_df")
     cid ="36b35ee75fec40c399220f9371d2e3b0" 
     secret = "c0ce447c51394e1198dc56fb787ee326"
@@ -30,7 +30,8 @@ def song_info(file_path,sparkSession=None):
     names = id_df.select("SongID").toPandas()
     # i=0
     i=int(np.floor(len(names)/2))
-    m=len(names)
+    m=int(np.floor(3*len(names)/4))
+    # m=len(names)
     while i<m:
         if (i+50)<m:
             song_ids = names.iloc[i:i+50]["SongID"].tolist()
@@ -50,7 +51,7 @@ def song_info(file_path,sparkSession=None):
                 final_df =final_df.append(temp_info,ignore_index = True)
         print(i)
     df_final=spark.createDataFrame(final_df)  
-    df_final.write.parquet("{}/{}".format(filepath, "final_music_10.parquet"))
+    df_final.write.parquet("{}/{}".format(filepath, "final_music_4.parquet"))
 
 def concat(file_path,sparkSession=None):
     spark = sparkSession or newSparkSession()
@@ -77,9 +78,9 @@ if __name__ == "__main__":
 # five: 743404 songs, out of 743817 songs 
 
 
-# one: final 8, id 4 part 2
+# one: final 8, id 4 part 2 //
 # two: final 9, id 6 part 1
-# three: final 10, id 6 part 2 
-#  four: final 4, id 2 part 2
+# three: final 10, id 6 part 2  //
+#  four: final 4, id 2 part 2 
 
 
