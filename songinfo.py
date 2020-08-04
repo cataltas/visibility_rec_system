@@ -21,15 +21,16 @@ def newSparkSession():
 def song_info(file_path,sparkSession=None):
     spark = sparkSession or newSparkSession()
     final_df = pd.DataFrame()
-    id_df = spark.read.parquet("{}/{}".format(filepath, "id_data_4.parquet"))
+    id_df = spark.read.parquet("{}/{}".format(filepath, "id_data_6.parquet"))
     id_df.createOrReplaceTempView("id_df")
     cid ="36b35ee75fec40c399220f9371d2e3b0" 
     secret = "c0ce447c51394e1198dc56fb787ee326"
     client_credentials_manager = SpotifyClientCredentials(client_id=cid, client_secret=secret)
     sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
     names = id_df.select("SongID").toPandas()
-    i=int(np.floor(len(names)/2))
-    m=len(names)
+    i=0
+    m=int(np.floor(len(names)/2))
+    # m=len(names)
     while i<m:
         if (i+50)<m:
             song_ids = names.iloc[i:i+50]["SongID"].tolist()
@@ -49,14 +50,14 @@ def song_info(file_path,sparkSession=None):
                 final_df =final_df.append(temp_info,ignore_index = True)
         print(i)
     df_final=spark.createDataFrame(final_df)  
-    df_final.write.parquet("{}/{}".format(filepath, "final_music_8.parquet"))
+    df_final.write.parquet("{}/{}".format(filepath, "final_music_9.parquet"))
 
 def concat(file_path,sparkSession=None):
     spark = sparkSession or newSparkSession()
     idd = spark.read.parquet("{}/{}".format(filepath, "id_data.parquet"))
     idd.createOrReplaceTempView("idd")
-    final_df = spark.read.parquet("{}/{}".format(filepath, "final_music_1.parquet"))
-    for i in range(2,12):
+    final_df = spark.read.parquet("{}/{}".format(filepath, "final_music_5_2.parquet"))
+    for i in range(1,12):
         temp_df = spark.read.parquet("{}/{}".format(filepath, "final_music_{}.parquet".format(i)))
         temp_df.createOrReplaceTempView("temp_df")
         final_df= final_df.union(temp_df)
@@ -77,7 +78,7 @@ if __name__ == "__main__":
 
 
 # one: final 8, id 4 part 2
-# two: 
+# two: final 9, id 6 part 1
 # three: final 7, id 4 part 1 // 
 #  four: final 4, id 2 part 2
 
