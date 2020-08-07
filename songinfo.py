@@ -31,25 +31,24 @@ def song_info(file_path,sparkSession=None):
     i=0
     m=int(np.floor(len(names)/2))
     # m=len(names)
-    print(m)
-    # while i<m:
-    #     if (i+50)<m:
-    #         song_ids = names.iloc[i:i+50]["SongID"].tolist()
-    #     else:
-    #         song_ids = names.iloc[i:m]["SongID"].tolist()
-    #     i+=50
-    #     try:
-    #         info = sp.audio_features(song_ids)
-    #     except:
-    #         print ("Timeout occurred")
-    #     for j,val in enumerate(info):
-    #         if val!=None:
-    #             info_line = [song_ids[j],val["danceability"],val["energy"],val["key"],val["loudness"],val["mode"],
-    #                         val["speechiness"],val["acousticness"],val["instrumentalness"],val["liveness"],val["valence"],val["tempo"]]
-    #             temp_info = pd.DataFrame([info_line],columns=["SongID","danceability","energy","key","loudness","mode","speechiness","acousticness",
-    #                                                             "instrumentalness","liveness","valence","tempo"])
-    #             final_df =final_df.append(temp_info,ignore_index = True)
-    #     print(i)
+    while i<m:
+        if (i+50)<m:
+            song_ids = names.iloc[i:i+50]["SongID"].tolist()
+        else:
+            song_ids = names.iloc[i:m]["SongID"].tolist()
+        i+=50
+        try:
+            info = sp.audio_features(song_ids)
+        except:
+            print ("Timeout occurred")
+        for j,val in enumerate(info):
+            if val!=None:
+                info_line = [song_ids[j],val["danceability"],val["energy"],val["key"],val["loudness"],val["mode"],
+                            val["speechiness"],val["acousticness"],val["instrumentalness"],val["liveness"],val["valence"],val["tempo"]]
+                temp_info = pd.DataFrame([info_line],columns=["SongID","danceability","energy","key","loudness","mode","speechiness","acousticness",
+                                                                "instrumentalness","liveness","valence","tempo"])
+                final_df =final_df.append(temp_info,ignore_index = True)
+        print(i)
     # df_final=spark.createDataFrame(final_df)  
     # df_final.write.parquet("{}/{}".format(filepath, "final_music_9.parquet"))
 
