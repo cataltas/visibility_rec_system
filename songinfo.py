@@ -49,7 +49,7 @@ def song_info(file_path,sparkSession=None):
                                                                 "instrumentalness","liveness","valence","tempo"])
                 final_df =final_df.append(temp_info,ignore_index = True)
         print(i)
-    # df_final=spark.createDataFrame(final_df)  
+    df_final=spark.createDataFrame(final_df)  
     # df_final.write.parquet("{}/{}".format(filepath, "final_music_9.parquet"))
 
 def concat(file_path,sparkSession=None):
