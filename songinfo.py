@@ -31,7 +31,7 @@ def song_info(file_path,sparkSession=None):
     i=0
     m=int(np.floor(len(names)/2))
     # m=len(names)
-    print(len(names))
+    print(m)
     # while i<m:
     #     if (i+50)<m:
     #         song_ids = names.iloc[i:i+50]["SongID"].tolist()
