@@ -29,7 +29,7 @@ def song_info(file_path,sparkSession=None):
     sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
     names = id_df.select("SongID").toPandas()
     i=0
-    m=int(np.floor(len(names)/2))
+    m=300000
     # m=len(names)
     while i<m:
         if (i+50)<m:
@@ -50,7 +50,7 @@ def song_info(file_path,sparkSession=None):
                 final_df =final_df.append(temp_info,ignore_index = True)
         print(i)
     df_final=spark.createDataFrame(final_df)  
-    # df_final.write.parquet("{}/{}".format(filepath, "final_music_9.parquet"))
+    df_final.write.parquet("{}/{}".format(filepath, "final_music_9.parquet"))
 
 def concat(file_path,sparkSession=None):
     spark = sparkSession or newSparkSession()
