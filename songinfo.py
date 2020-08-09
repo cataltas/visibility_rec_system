@@ -47,6 +47,7 @@ def song_info(file_path,sparkSession=None):
                             val["speechiness"],val["acousticness"],val["instrumentalness"],val["liveness"],val["valence"],val["tempo"]]
                 temp_info = pd.DataFrame([info_line],columns=["SongID","danceability","energy","key","loudness","mode","speechiness","acousticness",
                                                                 "instrumentalness","liveness","valence","tempo"])
+                print(temp_info)
                 final_df =final_df.append(temp_info,ignore_index = True)
         print(i)
     df_final=spark.createDataFrame(final_df)  
