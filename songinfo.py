@@ -36,7 +36,7 @@ def song_info(file_path,sparkSession=None):
             song_ids = names.iloc[i:i+10]["SongID"].tolist()
         else:
             song_ids = names.iloc[i:m]["SongID"].tolist()
-        i+=50
+        i+=10
         try:
             info = sp.audio_features(song_ids)
         except:
