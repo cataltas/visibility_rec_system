@@ -29,7 +29,7 @@ def song_info(file_path,sparkSession=None):
     sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
     names = id_df.select("SongID").toPandas()
     i=0
-    m=200000
+    m=100000
     # m=len(names)
     while i<m:
         if (i+50)<m:
@@ -63,7 +63,7 @@ def concat(file_path,sparkSession=None):
         final_df= final_df.union(temp_df)
     final_df.createOrReplaceTempView("final_df") 
     final = spark.sql("SELECT * FROM final_df INNER JOIN idd on idd.SongId = final_df.SongId")
-    final.write.parquet("{}/{}".format(filepath, "final.parquet"))
+    # final.write.parquet("{}/{}".format(filepath, "final.parquet"))
 
 def main():
     song_info(filepath)    
