@@ -32,7 +32,7 @@ def song_info(file_path,sparkSession=None):
     m=107000
     # m=len(names)
     while i<m:
-        if (i+50)<m:
+        if (i+10)<m:
             song_ids = names.iloc[i:i+10]["SongID"].tolist()
         else:
             song_ids = names.iloc[i:m]["SongID"].tolist()
