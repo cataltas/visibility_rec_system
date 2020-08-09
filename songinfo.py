@@ -30,7 +30,7 @@ def song_info(file_path,sparkSession=None):
     names = id_df.select("SongID").toPandas()
     # i=100000
     i = 106000
-    m=107000
+    m=106500
     # m=len(names)
     while i<m:
         if (i+50)<m:
