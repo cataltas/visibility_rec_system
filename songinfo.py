@@ -28,8 +28,8 @@ def song_info(file_path,sparkSession=None):
     client_credentials_manager = SpotifyClientCredentials(client_id=cid, client_secret=secret)
     sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
     names = id_df.select("SongID").toPandas()
-    i=106000
-    m=107100
+    i=100000
+    m=110000
     # m=len(names)
     while i<m:
         if (i+10)<m:
