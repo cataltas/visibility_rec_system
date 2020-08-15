@@ -47,8 +47,8 @@ def song_info(file_path,sparkSession=None):
                     val["danceability"],
                     val["energy"],
                     val["key"],
-                    # val["loudness"],
-                    val["mode"],
+                    val["loudness"],
+                    # val["mode"],
                             val["speechiness"],val["acousticness"],
                             val["instrumentalness"],
                             val["liveness"],val["valence"],val["tempo"]]
@@ -57,8 +57,9 @@ def song_info(file_path,sparkSession=None):
                 "danceability",
                 "energy",
                 "key",
-                # "loudness",
-                "mode","speechiness","acousticness",
+                "loudness",
+                # "mode",
+                "speechiness","acousticness",
                                                                 "instrumentalness",
                                                                 "liveness","valence","tempo"])
                 print(temp_info)
