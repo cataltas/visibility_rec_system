@@ -48,8 +48,9 @@ def song_info(file_path,sparkSession=None):
                     val["energy"],
                     val["key"],
                     val["loudness"],
-                    # val["mode"],
-                            val["speechiness"],val["acousticness"],
+                    val["mode"],
+                            # val["speechine/ss"],
+                            val["acousticness"],
                             val["instrumentalness"],
                             val["liveness"],val["valence"],val["tempo"]]
                 temp_info = pd.DataFrame([info_line],columns=[
@@ -58,8 +59,9 @@ def song_info(file_path,sparkSession=None):
                 "energy",
                 "key",
                 "loudness",
-                # "mode",
-                "speechiness","acousticness",
+                "mode",
+                # "speechiness",
+                "acousticness",
                                                                 "instrumentalness",
                                                                 "liveness","valence","tempo"])
                 print(temp_info)
