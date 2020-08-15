@@ -44,7 +44,7 @@ def song_info(file_path,sparkSession=None):
             if val!=None:
                 info_line = [song_ids[j],val["danceability"],val["energy"],val["key"],val["loudness"],val["mode"],
                             val["speechiness"],val["acousticness"],val["instrumentalness"],val["liveness"],val["valence"],val["tempo"]]
-                info_line = [x if x!= None else x=np.nan for x in info_line]
+                info_line = [x if x!= None else np.nan for x in info_line]
                 temp_info = pd.DataFrame([info_line],columns=[
                     "SongID","danceability","energy","key","loudness","mode","speechiness",
                 "acousticness","instrumentalness","liveness","valence","tempo"])
