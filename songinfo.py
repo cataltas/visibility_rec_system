@@ -43,7 +43,9 @@ def song_info(file_path,sparkSession=None):
         for j,val in enumerate(info):
             if val!=None:
                 info_line = [song_ids[j],val["danceability"],val["energy"],val["key"],val["loudness"],val["mode"],
-                            val["speechiness"],val["acousticness"],val["instrumentalness"],val["liveness"],val["valence"],val["tempo"]]
+                            val["speechiness"],val["acousticness"],
+                            # val["instrumentalness"],
+                            val["liveness"],val["valence"],val["tempo"]]
                 temp_info = pd.DataFrame([info_line],columns=["SongID","danceability","energy","key","loudness","mode","speechiness","acousticness",
                                                                 "instrumentalness","liveness","valence","tempo"])
                 print(temp_info)
