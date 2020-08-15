@@ -66,7 +66,7 @@ def song_info(file_path,sparkSession=None):
                 # "acousticness",
                 #                                                 "instrumentalness",
                 #                                                 "liveness",
-                                                                "valence"]
+                                                                "valence"])
                 #                                                 "tempo"])
                 print(temp_info)
                 final_df =final_df.append(temp_info,ignore_index = True)
