@@ -51,8 +51,9 @@ def song_info(file_path,sparkSession=None):
                     val["mode"],
                             val["speechiness"],
                             val["acousticness"],
-                            # val["instrumentalness"],
-                            val["liveness"],val["valence"],val["tempo"]]
+                            val["instrumentalness"],
+                            # val["liveness"],
+                            val["valence"],val["tempo"]]
                 temp_info = pd.DataFrame([info_line],columns=[
                     "SongID",
                 "danceability",
@@ -62,8 +63,9 @@ def song_info(file_path,sparkSession=None):
                 "mode",
                 "speechiness",
                 "acousticness",
-                                                                # "instrumentalness",
-                                                                "liveness","valence","tempo"])
+                                                                "instrumentalness",
+                                                                # "liveness",
+                                                                "valence","tempo"])
                 print(temp_info)
                 final_df =final_df.append(temp_info,ignore_index = True)
         print(i)
