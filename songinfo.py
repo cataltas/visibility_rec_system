@@ -28,8 +28,8 @@ def song_info(file_path,sparkSession=None):
     client_credentials_manager = SpotifyClientCredentials(client_id=cid, client_secret=secret)
     sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
     names = id_df.select("SongID").toPandas()
-    i=200860
-    m=200864
+    i=0
+    m= int(floor(len(names)/2))
     while i<m:
         if (i+1)<m:
             song_ids = names.iloc[i:i+1]["SongID"].tolist()
@@ -48,7 +48,6 @@ def song_info(file_path,sparkSession=None):
                 temp_info = pd.DataFrame([info_line],columns=[
                     "SongID","danceability","energy","key","loudness","mode","speechiness",
                 "acousticness","instrumentalness","liveness","valence","tempo"])
-                print(temp_info)
                 final_df =final_df.append(temp_info,ignore_index = True)
         print(i)
     df_final=spark.createDataFrame(final_df)  
@@ -80,8 +79,7 @@ if __name__ == "__main__":
 
 
 # one: final 8, id 4 part 2 //
-# two: final 9, id 6 part 1, 459900
+# two: final 9, id 6 part 1
 # three: final 10, id 6 part 2  //
-#  four: final 4, id 2 part 2, 1346878
-
+#  four: final 4, id 2 part 2
 
