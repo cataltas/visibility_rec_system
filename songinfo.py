@@ -29,13 +29,14 @@ def song_info(file_path,sparkSession=None):
     sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
     names = id_df.select("SongID").toPandas()
     i=0
-    m= int(floor(len(names)/2))
+    m= int(np.floor(len(names)/2))
+    # m = len(names)
     while i<m:
-        if (i+1)<m:
-            song_ids = names.iloc[i:i+1]["SongID"].tolist()
+        if (i+50)<m:
+            song_ids = names.iloc[i:i+50]["SongID"].tolist()
         else:
             song_ids = names.iloc[i:m]["SongID"].tolist()
-        i+=1
+        i+=50
         try:
             info = sp.audio_features(song_ids)
         except:
@@ -75,11 +76,7 @@ if __name__ == "__main__":
 # put all six in concat then inner join with id data total on song id
 
 
-# five: 743404 songs, out of 743817 songs 
 
-
-# one: final 8, id 4 part 2 //
 # two: final 9, id 6 part 1
-# three: final 10, id 6 part 2  //
 #  four: final 4, id 2 part 2
 
