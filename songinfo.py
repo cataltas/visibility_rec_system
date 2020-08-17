@@ -58,6 +58,7 @@ def concat(file_path,sparkSession=None):
     spark = sparkSession or newSparkSession()
     idd = spark.read.parquet("{}/{}".format(filepath, "id_data.parquet"))
     idd.createOrReplaceTempView("idd")
+    print(idd.count())
     final_df = spark.read.parquet("{}/{}".format(filepath, "final_music_5_2.parquet"))
     for i in range(1,11):
         temp_df = spark.read.parquet("{}/{}".format(filepath, "final_music_{}.parquet".format(i)))
