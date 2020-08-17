@@ -66,7 +66,7 @@ def concat(file_path,sparkSession=None):
         final_df= final_df.union(temp_df)
     final_df.createOrReplaceTempView("final_df") 
     print(final_df.count())
-    final = spark.sql("SELECT Artist, Gender, idd.SongID,Popularity,Year,danceability,energy,key,loudness,mode,speechiness,acousticness,instrumentalness,liveness,valence,tempo FROM final_df RIGHT JOIN idd on idd.SongId = final_df.SongId")
+    final = spark.sql("SELECT Artist, Gender, idd.SongID,Popularity,Year,danceability,energy,key,loudness,mode,speechiness,acousticness,instrumentalness,liveness,valence,tempo FROM final_df LEFT JOIN idd on idd.SongId = final_df.SongId")
     print(final.count())
     # final.write.parquet("{}/{}".format(filepath, "final.parquet"))
 
@@ -76,10 +76,8 @@ def main():
 if __name__ == "__main__":
     main()
 
-# put all six in concat then inner join with id data total on song id
+# check difference betwee inner annd right join
 
 
 
-# two: final 9, id 6 part 1
-#  four: final 4, id 2 part 2
 
