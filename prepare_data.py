@@ -37,8 +37,8 @@ def prepare(filepath,sparkSession=None):
 def correlation(data):
     dfe = data.drop(*["Artist","SongID"])
     vector_col = "corr_features"
-    assembler = VectorAssembler(inputCols=df2.columns, outputCol=vector_col)
-    df_vector = assembler.transform(df2).select(vector_col)
+    assembler = VectorAssembler(inputCols=dfe.columns, outputCol=vector_col)
+    df_vector = assembler.transform(dfe).select(vector_col)
     matrix = Correlation.corr(df_vector, vector_col)
     mat_array = np.reshape(matrix.collect()[0]["pearson({})".format(vector_col)].values,[14,14])
     m=pd.DataFrame(mat_array,columns=dfe.columns,index=dfe.columns)
