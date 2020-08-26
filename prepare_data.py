@@ -45,7 +45,7 @@ def correlation(data):
     m=pd.DataFrame(mat_array,columns=dfe.columns,index=dfe.columns)
     ax = sns.heatmap(m)
     print(ax)
-    plt.show()
+    # plt.show()
 
 
 
