@@ -32,6 +32,7 @@ def prepare(filepath,sparkSession=None):
     df = df.withColumn("Year", df["Year"].cast(IntegerType()))
     col ="Gender"
     df = df.withColumn(col, f.when(f.col(col)=="Female",1).when(f.col(col)=="Male",0))
+    return df
 
 def correlation(data):
     dfe = data.drop(*["Artist","SongID"])
