@@ -23,7 +23,7 @@ def newSparkSession():
     spark.sparkContext.setLogLevel("ERROR")
     return spark
 
-def prepare(data_path):
+def prepare(filepath):
     df = spark.read.parquet("{}/{}".format(filepath, "final.parquet"))
     df = df.dropDuplicates()
     df= df.dropna()
@@ -46,7 +46,7 @@ def correlation(data):
 
 
 def main():
-    data =data_path(filepath)  
+    data =prepare(filepath)  
     correlation(data)
 
 if __name__ == "__main__":
