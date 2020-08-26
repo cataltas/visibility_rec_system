@@ -24,6 +24,7 @@ def newSparkSession():
     return spark
 
 def prepare(filepath):
+    spark = sparkSession or newSparkSession()
     df = spark.read.parquet("{}/{}".format(filepath, "final.parquet"))
     df = df.dropDuplicates()
     df= df.dropna()
