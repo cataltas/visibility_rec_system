@@ -8,6 +8,7 @@ from pyspark.ml.stat import Correlation
 from pyspark.ml.feature import VectorAssembler
 import seaborn as sns
 import matplotlib.pyplot as plt
+import numpy as np
 
 
 filepath = "hdfs:/user/ct2522"
