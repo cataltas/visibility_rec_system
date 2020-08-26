@@ -43,9 +43,9 @@ def correlation(data):
     matrix = Correlation.corr(df_vector, vector_col)
     mat_array = np.reshape(matrix.collect()[0]["pearson({})".format(vector_col)].values,[14,14])
     m=pd.DataFrame(mat_array,columns=dfe.columns,index=dfe.columns)
-    # ax = sns.heatmap(m)
-    print(mat_array)
-    # plt.show()
+    ax = sns.heatmap(m)
+    print(dfe_columns)
+    plt.show()
 
 
 
