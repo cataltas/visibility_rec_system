@@ -23,7 +23,7 @@ def newSparkSession():
     spark.sparkContext.setLogLevel("ERROR")
     return spark
 
-def prepare(filepath):
+def prepare(filepath,sparkSession=None):
     spark = sparkSession or newSparkSession()
     df = spark.read.parquet("{}/{}".format(filepath, "final.parquet"))
     df = df.dropDuplicates()
