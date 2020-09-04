@@ -62,7 +62,7 @@ def train_val_test_split(data):
 def main():
     data =prepare(filepath)  
     # correlation(data)
-    train,val,test=train_val_test_split(data)
+    return train_val_test_split(data)
 
 if __name__ == "__main__":
     main()
