@@ -9,6 +9,8 @@ from pyspark.ml.feature import VectorAssembler
 import seaborn as sns
 import matplotlib.pyplot as plt
 import numpy as np
+from pyspark.sql.functions import percent_rank
+from pyspark.sql import Window
 
 
 filepath = "hdfs:/user/ct2522"
@@ -47,11 +49,20 @@ def correlation(data):
     print(dfe.columns)
     # plt.show()
 
+def train_val_test_split(data):
+    data = data.withColumn("rank", percent_rank().over(Window.partitionBy().orderBy("Year")))
+    train_df = data.where("rank <= .6").drop("rank")
+    val_df = data.where("rank > 0.6 AND rank<=0.8 ").drop("rank")
+    test_df = data.where("rank>0.8 ").drop("rank")
+    return train_df,val_df,test_df
+
+
 
 
 def main():
     data =prepare(filepath)  
-    correlation(data)
+    # correlation(data)
+    train,val,test=train_val_test_split(data)
 
 if __name__ == "__main__":
     main()
