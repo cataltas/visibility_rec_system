@@ -21,6 +21,6 @@ data =prepare(filepath)
 train,val,test=train_val_test_split(data)
 train_col=train.columns
 train_col.remove("Popularity")
-rf = RandomForestClassifier(featuresCol =train_col, labelCol = "Popularity")
+rf = RandomForestClassifier(train.drop("Popularity"), labelCol = "Popularity")
 model = rf.fit(train)
 model.predict(val.drop("Popularity"))
