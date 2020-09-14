@@ -19,6 +19,7 @@ from pyspark.ml.classification import RandomForestClassifier
 filepath = "hdfs:/user/ct2522"
 data =prepare(filepath)  
 train,val,test=train_val_test_split(data)
+print(train.columns)
 rf = RandomForestClassifier(featuresCol =train.columns[-"Popularity"], labelCol = "Popularity")
 model = rf.fit(train)
 model.predict(val.drop("Popularity"))
